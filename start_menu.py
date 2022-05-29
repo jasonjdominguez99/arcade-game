@@ -22,12 +22,11 @@ class StartMenu(tk.Frame):
     
     def create_start_button(self, window, controller):
         window.columnconfigure(0, weight=1, minsize=75)
-        window.rowconfigure(0, weight=1, minsize=50)
+        window.rowconfigure([0, 1], weight=1, minsize=50)
 
         start_button = tk.Button(
             self,
             text="S T A R T",
             command = lambda: controller.load_frame("Game")
         )
-        # start_button.grid(row=0, column=0)
-        start_button.pack()
+        start_button.pack(side="bottom")
