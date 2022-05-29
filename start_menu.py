@@ -3,23 +3,25 @@
 # source code relating to loading the
 # start menu for the arcade game
 # 
-# Author: Jason Dominguez
-# Date: 2022-05-28
+# author: Jason Dominguez
+# date: 2022-05-28
 
-# Imports
-from tkinter import (
-    Tk, Button
-)
+# imports
+import tkinter as tk
 
-# Function definitions
-def load_start_menu(window):
-    start_button = Button(window, )
-    pass
 
-# Definition and execution of main program
-def main():
-    window = Tk()
-    window.mainloop()
+# class definitions
+class StartMenu(tk.Frame):
+    def __init__(self, parent, *args, **kwargs):
+        tk.Frame.__init__(self, parent, *args, **kwargs)
+        self.parent = parent
 
-if __name__ == "__main__":
-    main()
+        self.place_start_button(parent)
+
+    
+    def place_start_button(self, window):
+        window.columnconfigure(0, weight=1, minsize=75)
+        window.rowconfigure(0, weight=1, minsize=50)
+
+        start_button = tk.Button(text="S T A R T")
+        start_button.grid(row=0, column=0)
