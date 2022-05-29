@@ -1,17 +1,16 @@
-# start_menu.py
+# game.py
 # 
-# source code relating to the
-# start menu for the arcade game
+# source code relating to the game
 # 
 # author: Jason Dominguez
-# date: 2022-05-28
+# date: 2022-05-29
 
 # imports
 import tkinter as tk
 
 
 # class definitions
-class StartMenu(tk.Frame):
+class Game(tk.Frame):
     def __init__(self, parent, controller, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -26,8 +25,8 @@ class StartMenu(tk.Frame):
 
         start_button = tk.Button(
             self,
-            text="S T A R T",
-            command = lambda: controller.load_frame("Game")
+            text="E X I T",
+            command = lambda: controller.load_frame("StartMenu")
         )
         # start_button.grid(row=0, column=0)
         start_button.pack()
