@@ -2,7 +2,7 @@
 # 
 # main python file for python arcade-style game
 # 
-# author: Jason Dominguez
+# author: jason dominguez
 # date: 2021-10-14
 
 # imports
