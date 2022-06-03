@@ -15,36 +15,60 @@ from game import Game
 class AsteroidsGame(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        self.width = 500
+        self.height = 500
 
-        self.container = tk.Frame(self)
         self.configure_window()
 
-        self.frames = {}
-        for F in (StartMenu, Game):
-            frame_name = F.__name__
-            frame = F(parent=self.container, controller=self)
-            self.frames[frame_name] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
+        # self.container = tk.Frame(
+        #     self,
+        #     height=self.height,
+        #     width=self.width
+        # )
+        # self.configure_container()
 
-        self.load_frame("StartMenu")
+        self.pages = {}
+        
+        frame = StartMenu(master=self, w=self.width, h=self.height)
+        self.pages["StartMenu"] = frame
+        # frame.grid(row=0, column=0, sticky="nsew")
+
+        game_page = Game(master=self, w=self.width, h=self.height)
+        self.pages["Game"] = game_page
+        # game_page.grid(row=0, column=0, sticky="nsew")
+
+        self.load_page("StartMenu")
 
 
     def configure_window(self):
-        self.geometry("800x600")
         self.title("A  S  T  E  R  O  I  D  S")
 
-        self.container.pack(side="top", fill="both", expand=True)
-        self.container.grid_columnconfigure(0, weight=1)
-        self.container.grid_rowconfigure(0, weight=1)
+        self.resizable(False, False)
+
+        # place window in the center of the screen
+        screen_w = self.winfo_screenwidth()
+        screen_h = self.winfo_screenheight()
+        x = (screen_w//2) - (self.width//2)
+        y = (screen_h//2) - (self.height//2)
+        self.geometry(
+            "{}x{}+{}+{}".format(self.width, self.height, x, y))
+
+
+    # def configure_container(self):
+    #     self.container.pack(side="top", fill="both", expand=True)
+    #     self.container.grid_columnconfigure(0, weight=1)
+    #     self.container.grid_rowconfigure(0, weight=1)
 
     
-    def load_frame(self, frame_name):
-        # for frame in self.frames.values():
-        #     frame.grid_remove
-        frame = self.frames[frame_name]
-        # frame.grid()
-        frame.tkraise()
-        # print("Loaded: " + frame_name)
+    def load_page(self, page_name):
+        for page in self.pages.values():
+            page.pack_forget()
+            # page.grid_remove()
+        page = self.pages[page_name]
+        # page.grid()
+        page.pack()
+        # page.tkraise()
+        # print("Loaded: " + page_name)
 
 
 # definition and execution of main program

@@ -10,18 +10,49 @@ import tkinter as tk
 
 
 # class definitions
-class Game(tk.Frame):
-    def __init__(self, parent, controller, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.parent = parent
-        self.controller = controller
+class Game(tk.Canvas):
+    def __init__(self, master, w, h):
+        tk.Canvas.__init__(self, master, width=w, height=h, bg="black")
+        self.master = master
+        
+        self.pack()
+        # self.pack(fill="both", expand=True)
 
-        canvas = tk.Canvas(self, bg="black")
-        canvas.pack(fill="both", expand=True)
+        size = 10
+        ship = self.create_oval(
+            self.master.height/2 - size/2, self.master.width/2 - size/2,
+            self.master.height/2 + size/2, self.master.width/2 + size/2,
+            outline="white"
+        )
 
-        points = [400, 300, 410, 300, 405, 320]
-        canvas.create_polygon(points, outline="white", fill="black")
-        canvas.pack(fill="both", expand=True)
+        self.pack()
+
+
+
+    # def __init__(self, parent, controller, *args, **kwargs):
+    #     tk.Frame.__init__(self, parent, *args, **kwargs)
+    #     self.parent = parent
+    #     self.controller = controller
+
+    #     print(self.winfo_height())
+    #     canvas = tk.Canvas(self, width=self.winfo_width(), height=self.winfo_height(), bg="black")
+    #     canvas.pack()
+    #     # canvas.pack(fill="both", expand=True)
+
+    #     window_h = canvas.winfo_height()
+    #     window_w = canvas.winfo_width()
+    #     ship_h = 20
+    #     ship_w = 10
+    #     coords = [
+    #         window_w/2 - ship_w/2, window_h/2 + ship_h/2,
+    #         window_w/2 + ship_w/2, window_h/2 + ship_h/2,
+    #         window_w/2, window_h/2 - ship_h/2
+    #     ]
+    #     print(window_h)
+    #     print(window_w)
+    #     print(coords)
+    #     player = canvas.create_polygon(coords, outline="white", fill="black")
+    #     canvas.pack(fill="both", expand=True)
 
         # self.create_start_button(parent, controller)
 
