@@ -7,6 +7,7 @@
 
 # imports
 import tkinter as tk
+from player_ship import PlayerShip
 
 
 # class definitions
@@ -18,14 +19,19 @@ class Game(tk.Canvas):
         self.pack()
         # self.pack(fill="both", expand=True)
 
-        size = 10
-        ship = self.create_oval(
-            self.master.height/2 - size/2, self.master.width/2 - size/2,
-            self.master.height/2 + size/2, self.master.width/2 + size/2,
-            outline="white"
-        )
+        ship = PlayerShip(self)
+        ship.draw()
 
-        self.pack()
+        self.master.bind("<Up>", ship.move_forward)
+
+        # size = 10
+        # ship = self.create_oval(
+        #     self.master.height/2 - size/2, self.master.width/2 - size/2,
+        #     self.master.height/2 + size/2, self.master.width/2 + size/2,
+        #     outline="white"
+        # )
+
+        # self.pack()
 
 
 
