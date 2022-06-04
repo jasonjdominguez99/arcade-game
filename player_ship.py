@@ -16,9 +16,6 @@ class PlayerShip():
         self.width = 10
         self.height = 20
 
-        # key bindings
-        # self.canvas.bind("<KeyPress-W>", self.move_forward)
-
 
     def draw(self):
         center_coords = (self.canvas.master.width/2, self.canvas.master.height/2)
@@ -35,7 +32,7 @@ class PlayerShip():
         self.canvas.pack()
 
     def move_forward(self, event):
-        # print(event.keysym)
+        print(event.keysym)
         self.position[1] -= 1
         self.position[3] -= 1
         self.position[4] -= 1

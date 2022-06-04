@@ -20,13 +20,11 @@ class StartMenu(tk.Canvas):
 
     
     def create_start_button(self, window):
-        # window.columnconfigure(0, weight=1, minsize=75)
-        # window.rowconfigure([0, 1], weight=1, minsize=50)
 
         start_button = tk.Button(
             self,
             text="S T A R T",
             command = lambda: window.load_page("Game")
         )
-        # start_button.pack(side="bottom")
+        
         start_button.place(relx=0.5, rely=0.5, anchor="c")

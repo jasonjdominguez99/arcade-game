@@ -20,22 +20,13 @@ class AsteroidsGame(tk.Tk):
 
         self.configure_window()
 
-        # self.container = tk.Frame(
-        #     self,
-        #     height=self.height,
-        #     width=self.width
-        # )
-        # self.configure_container()
-
         self.pages = {}
         
         frame = StartMenu(master=self, w=self.width, h=self.height)
         self.pages["StartMenu"] = frame
-        # frame.grid(row=0, column=0, sticky="nsew")
 
         game_page = Game(master=self, w=self.width, h=self.height)
         self.pages["Game"] = game_page
-        # game_page.grid(row=0, column=0, sticky="nsew")
 
         self.load_page("StartMenu")
 
@@ -53,21 +44,12 @@ class AsteroidsGame(tk.Tk):
         self.geometry(
             "{}x{}+{}+{}".format(self.width, self.height, x, y))
 
-
-    # def configure_container(self):
-    #     self.container.pack(side="top", fill="both", expand=True)
-    #     self.container.grid_columnconfigure(0, weight=1)
-    #     self.container.grid_rowconfigure(0, weight=1)
-
     
     def load_page(self, page_name):
         for page in self.pages.values():
             page.pack_forget()
-            # page.grid_remove()
         page = self.pages[page_name]
-        # page.grid()
         page.pack()
-        # page.tkraise()
         # print("Loaded: " + page_name)
 
 
