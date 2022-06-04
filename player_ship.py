@@ -7,6 +7,7 @@
 # date: 2022-06-03
 
 # imports
+import math
 
 
 # class definitions
@@ -15,6 +16,10 @@ class PlayerShip():
         self.canvas = canvas
         self.width = 10
         self.height = 20
+
+        self.max_speed = 5
+        self.speed = 1
+        self.direction = 0          # direction in deg from upward
 
 
     def draw(self):
@@ -30,6 +35,26 @@ class PlayerShip():
         )
 
         self.canvas.pack()
+
+    def rotate(self, event):
+        if event.keysym == "Right":
+            angle = 5
+        elif event.keysym == "Left":
+            angle = -5
+
+        rad_angle = math.radians(angle)
+        sin_val = math.sin(rad_angle)
+        cos_val = math.cos(rad_angle)
+
+        x_center = sum([
+            x for i, x in enumerate(self.position) if i%2 == 0 
+        ]) / 3
+        y_center = sum([
+            y for i, y in enumerate(self.position) if i%2 == 1 
+        ]) / 3
+
+        # TODO: center ship coords, rotate coords, shift coords by center coords and reassign self.position
+        
 
     def move_forward(self, event):
         print(event.keysym)
