@@ -21,6 +21,7 @@ class Game(tk.Canvas):
         ship = PlayerShip(self)
         ship.draw()
 
-        self.bind("<Right><Left", ship.move_forward)
-        self.bind("<Up>w", ship.accelerate)
+        self.bind("<Right>", ship.rotate)
+        self.bind("<Left>", ship.rotate)
+        # self.bind("<Up>", ship.accelerate)
         self.focus_set()

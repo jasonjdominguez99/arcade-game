@@ -19,15 +19,16 @@ class PlayerShip():
 
         self.max_speed = 5
         self.speed = 1
+        self.rotation_speed = 15
         self.direction = 0          # direction in deg from upward
 
 
     def draw(self):
         center_coords = (self.canvas.master.width/2, self.canvas.master.height/2)
         coords = [
-            center_coords[0] - self.width/2, center_coords[1] + self.height/2,
-            center_coords[0] + self.width/2, center_coords[1] + self.height/2,
-            center_coords[0], center_coords[1] - self.height/2
+            center_coords[0] - self.width/2, center_coords[1] + self.height/3,
+            center_coords[0] + self.width/2, center_coords[1] + self.height/3,
+            center_coords[0], center_coords[1] - 2*self.height/3
         ]
         self.position = coords
         self.player_ship = self.canvas.create_polygon(
@@ -36,16 +37,8 @@ class PlayerShip():
 
         self.canvas.pack()
 
-    def rotate(self, event):
-        if event.keysym == "Right":
-            angle = 5
-        elif event.keysym == "Left":
-            angle = -5
-
-        rad_angle = math.radians(angle)
-        sin_val = math.sin(rad_angle)
-        cos_val = math.cos(rad_angle)
-
+    
+    def get_center_coords(self):
         x_center = sum([
             x for i, x in enumerate(self.position) if i%2 == 0 
         ]) / 3
@@ -53,7 +46,37 @@ class PlayerShip():
             y for i, y in enumerate(self.position) if i%2 == 1 
         ]) / 3
 
-        # TODO: center ship coords, rotate coords, shift coords by center coords and reassign self.position
+        return (x_center, y_center)
+
+
+    def rotate(self, event):
+        if event.keysym == "Right":
+            self.direction += self.rotation_speed
+        else:
+            self.direction -= self.rotation_speed
+
+        x_center, y_center = self.get_center_coords()
+
+        rad_angle = math.radians(self.direction)
+        phi = math.atan((self.width/2)/(self.height/3))
+        theta = math.pi/2 - rad_angle - phi
+        r = math.sqrt((self.height/3)**2 + (self.width/2)**2)
+        coords = [
+            x_center + (2*self.height/3)*math.sin(rad_angle), y_center - (2*self.height/3)*math.cos(rad_angle),
+            x_center - r*math.cos(theta), y_center + r*math.sin(theta),
+            x_center + r*math.sin(phi - rad_angle), y_center + r*math.cos(phi - rad_angle)
+        ]
+
+        self.position = coords
+        self.canvas.coords(
+            self.player_ship,
+            self.position[0], self.position[1],
+            self.position[2], self.position[3],
+            self.position[4], self.position[5]
+        )
+        
+        # print("Ship rotated")
+        # print(event.keysym)
         
 
     def move_forward(self, event):
