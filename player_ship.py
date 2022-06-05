@@ -17,13 +17,19 @@ class PlayerShip():
         self.width = 10
         self.height = 20
 
-        self.max_speed = 5
-        self.speed = 1
+        self.max_speed = 4
+        self.speed = 0
         self.rotation_speed = 15
         self.direction = 0          # direction in deg from upward
 
+        self.set_initial_position()
 
-    def draw(self):
+        self.player_ship = self.canvas.create_polygon(
+            self.position, outline="white", fill="black"
+        )
+
+
+    def set_initial_position(self):
         center_coords = (self.canvas.master.width/2, self.canvas.master.height/2)
         coords = [
             center_coords[0] - self.width/2, center_coords[1] + self.height/3,
@@ -31,10 +37,9 @@ class PlayerShip():
             center_coords[0], center_coords[1] - 2*self.height/3
         ]
         self.position = coords
-        self.player_ship = self.canvas.create_polygon(
-            self.position, outline="white", fill="black"
-        )
 
+
+    def draw(self):
         self.canvas.pack()
 
     
@@ -67,7 +72,7 @@ class PlayerShip():
             x_center + r*math.sin(phi - rad_angle), y_center + r*math.cos(phi - rad_angle)
         ]
 
-        self.position = coords
+        self.position = [round(coord) for coord in coords]
         self.canvas.coords(
             self.player_ship,
             self.position[0], self.position[1],
@@ -79,14 +84,36 @@ class PlayerShip():
         # print(event.keysym)
         
 
-    def move_forward(self, event):
-        print(event.keysym)
-        self.position[1] -= 1
-        self.position[3] -= 1
-        self.position[4] -= 1
+    def accelerate(self, event):
+        if self.speed < self.max_speed:
+            self.speed += 1
 
-        self.canvas.move(
-            self.player_ship, 0, -1
-        )
-        # print("Ship moved forward")
+        print("Ship accelerated")
+        print(event.keysym)
     
+
+    def move(self):
+        coords = self.position
+        if self.speed != 0:
+            rad_angle = math.radians(self.direction)
+
+            x_increase = self.speed*math.sin(rad_angle)
+            y_increase = self.speed*math.cos(rad_angle)
+
+            for i in range(len(self.position)):
+                if i%2 == 0:
+                    coords[i] += x_increase
+                else:
+                    coords[i] -= y_increase
+                
+                coords[i] = round(self.position[i])
+
+            self.position = [round(coord) for coord in coords]  
+            self.canvas.coords(
+                self.player_ship,
+                self.position[0], self.position[1],
+                self.position[2], self.position[3],
+                self.position[4], self.position[5]
+            )
+
+        self.canvas.after(10, self.move)
