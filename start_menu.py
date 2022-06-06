@@ -3,8 +3,9 @@
 # source code relating to the
 # start menu for the arcade game
 # 
-# author: Jason Dominguez
+# author: jason dominguez
 # date: 2022-05-28
+
 
 # imports
 import tkinter as tk

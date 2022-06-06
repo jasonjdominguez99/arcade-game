@@ -2,8 +2,9 @@
 # 
 # source code relating to the game
 # 
-# author: Jason Dominguez
+# author: jason dominguez
 # date: 2022-05-29
+
 
 # imports
 import tkinter as tk

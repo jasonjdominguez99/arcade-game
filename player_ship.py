@@ -6,11 +6,19 @@
 # author: Jason Dominguez
 # date: 2022-06-03
 
+
 # imports
 import math
 
 
-# class definitions
+# class definition
+# TODO: make ship appear at opposite side of screen if it goes over the edge
+# TODO: make ship lose a life if hits an enemy object
+# TODO: add shooting functionality
+# TODO: add scoring
+# TODO: add power ups
+# TODO: add acceleration graphics, i.e. fire out of back of ship when accelerating
+# TODO: improve motion control, specifically improve deceleration and being able to turn whilst moving in a different direction
 class PlayerShip():
     def __init__(self, canvas):
         self.canvas = canvas
@@ -18,7 +26,10 @@ class PlayerShip():
         self.height = 20
 
         self.max_speed = 2
+        self.min_speed = 0.5
         self.speed = 0
+        self.acceleration = 1
+        self.deceleration = 0.01
         self.rotation_speed = 10
         self.direction = 0          # direction in deg from upward
 
@@ -86,14 +97,15 @@ class PlayerShip():
 
     def accelerate(self, event):
         if self.speed < self.max_speed:
-            self.speed += 1
+            self.speed += self.acceleration
 
         # print("Ship accelerated")
         # print(event.keysym)
 
+
     def decelerate(self):
-        if self.speed > 0.5:
-            self.speed -= 0.01
+        if self.speed > self.min_speed:
+            self.speed -= self.deceleration
     
 
     def move(self):
