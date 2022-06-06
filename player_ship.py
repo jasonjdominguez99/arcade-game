@@ -17,9 +17,9 @@ class PlayerShip():
         self.width = 10
         self.height = 20
 
-        self.max_speed = 4
+        self.max_speed = 2
         self.speed = 0
-        self.rotation_speed = 15
+        self.rotation_speed = 10
         self.direction = 0          # direction in deg from upward
 
         self.set_initial_position()
@@ -88,8 +88,12 @@ class PlayerShip():
         if self.speed < self.max_speed:
             self.speed += 1
 
-        print("Ship accelerated")
-        print(event.keysym)
+        # print("Ship accelerated")
+        # print(event.keysym)
+
+    def decelerate(self):
+        if self.speed > 0.5:
+            self.speed -= 0.01
     
 
     def move(self):
@@ -117,3 +121,5 @@ class PlayerShip():
             )
 
         self.canvas.after(10, self.move)
+        self.decelerate()
+        
