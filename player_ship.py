@@ -33,6 +33,8 @@ class PlayerShip():
         self.rotation_speed = 10
         self.direction = 0          # direction in deg from upward
 
+        self.score = 0
+
         self.set_initial_position()
 
         self.player_ship = self.canvas.create_polygon(
