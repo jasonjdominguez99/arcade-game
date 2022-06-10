@@ -9,6 +9,7 @@
 
 # imports
 import math
+from projectile import Projectile
 
 
 # class definition
@@ -136,4 +137,8 @@ class PlayerShip():
 
         self.canvas.after(10, self.move)
         self.decelerate()
+
+
+    def shoot(self, event):
+        proj = Projectile()
         
