@@ -17,7 +17,7 @@ from projectile import Projectile
 # TODO: add scoring
 # TODO: add power ups
 # TODO: add acceleration graphics, i.e. fire out of back of ship when accelerating
-# TODO: improve motion control, specifically improve deceleration and being able to turn whilst moving in a different direction
+# TODO: improve motion control
 class PlayerShip():
     def __init__(self, canvas):
         self.canvas = canvas
@@ -30,7 +30,9 @@ class PlayerShip():
         self.acceleration = 1
         self.deceleration = 0.01
         self.rotation_speed = 10
-        self.direction = 0          # direction in deg from upward
+        # directions in deg from upward
+        self.direction = 0
+        self.acc_direction = 0
 
         self.score = 0
 
@@ -97,6 +99,7 @@ class PlayerShip():
         
 
     def accelerate(self, event):
+        self.acc_direction = self.direction
         if self.speed < self.max_speed:
             self.speed += self.acceleration
 
@@ -111,7 +114,7 @@ class PlayerShip():
 
     def move(self):
         if self.speed != 0:
-            rad_angle = math.radians(self.direction)
+            rad_angle = math.radians(self.acc_direction)
 
             x_increase = self.speed*math.sin(rad_angle)
             y_increase = self.speed*math.cos(rad_angle)
