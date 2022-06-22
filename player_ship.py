@@ -15,7 +15,6 @@ from projectile import Projectile
 # class definition
 # TODO: make ship appear at opposite side of screen if it goes over the edge
 # TODO: make ship lose a life if hits an enemy object
-# TODO: add shooting functionality
 # TODO: add scoring
 # TODO: add power ups
 # TODO: add acceleration graphics, i.e. fire out of back of ship when accelerating
@@ -81,9 +80,9 @@ class PlayerShip():
         theta = math.pi/2 - rad_angle - phi
         r = math.sqrt((self.height/3)**2 + (self.width/2)**2)
         coords = [
-            x_center + (2*self.height/3)*math.sin(rad_angle), y_center - (2*self.height/3)*math.cos(rad_angle),
             x_center - r*math.cos(theta), y_center + r*math.sin(theta),
-            x_center + r*math.sin(phi - rad_angle), y_center + r*math.cos(phi - rad_angle)
+            x_center + r*math.sin(phi - rad_angle), y_center + r*math.cos(phi - rad_angle),
+            x_center + (2*self.height/3)*math.sin(rad_angle), y_center - (2*self.height/3)*math.cos(rad_angle)
         ]
 
         self.position = [round(coord) for coord in coords]
@@ -125,9 +124,6 @@ class PlayerShip():
                 else:
                     coords[i] -= y_increase
                 
-                coords[i] = round(self.position[i])
-
-            self.position = [round(coord) for coord in coords]  
             self.canvas.coords(
                 self.player_ship,
                 self.position[0], self.position[1],
@@ -140,5 +136,8 @@ class PlayerShip():
 
 
     def shoot(self, event):
-        proj = Projectile()
+        proj = Projectile(self.canvas, self.position,
+                          self.direction, self.speed, self.max_speed)
+        proj.draw()
+        proj.move()
         
