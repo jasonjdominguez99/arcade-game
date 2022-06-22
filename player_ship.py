@@ -13,7 +13,6 @@ from projectile import Projectile
 
 
 # class definition
-# TODO: make ship appear at opposite side of screen if it goes over the edge
 # TODO: make ship lose a life if hits an enemy object
 # TODO: add scoring
 # TODO: add power ups
@@ -111,7 +110,6 @@ class PlayerShip():
     
 
     def move(self):
-        coords = self.position
         if self.speed != 0:
             rad_angle = math.radians(self.direction)
 
@@ -120,9 +118,33 @@ class PlayerShip():
 
             for i in range(len(self.position)):
                 if i%2 == 0:
-                    coords[i] += x_increase
+                    self.position[i] += x_increase
                 else:
-                    coords[i] -= y_increase
+                    self.position[i] -= y_increase
+
+            # check is ship moves off screen, if so make appear on opposite side of screen
+            x_coords = [self.position[i] for i in range(0, len(self.position), 2)]
+            y_coords = [self.position[i] for i in range(1, len(self.position), 2)]
+            
+            self.canvas.master.update()
+            if max(x_coords) < 0:
+                x_coords = [x + self.canvas.winfo_width()
+                            for x in x_coords]
+            elif min(x_coords) > self.canvas.winfo_width():
+                x_coords = [x - self.canvas.winfo_width()
+                            for x in x_coords]
+            elif max(y_coords) < 0:
+                y_coords = [y + self.canvas.winfo_height()
+                            for y in y_coords]
+            elif min(y_coords) > self.canvas.winfo_height():
+                y_coords = [y - self.canvas.winfo_height()
+                            for y in y_coords]
+
+            self.position = [
+                x_coords[0], y_coords[0],
+                x_coords[1], y_coords[1],
+                x_coords[2], y_coords[2]
+            ]
                 
             self.canvas.coords(
                 self.player_ship,

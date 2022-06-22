@@ -12,9 +12,8 @@ import math
 
 
 # class definition
-# TODO: draw projectile as line on canvas
-# TODO: control motion, speed etc. of projectile
 # TODO: check for collision with enemy object
+# TODO: create different types of projectiles using inheritance
 class Projectile():
     def __init__(self, canvas, ship_coords, ship_direction,
                  ship_speed, ship_max_speed):
