@@ -17,7 +17,7 @@ from projectile import Projectile
 # TODO: add scoring
 # TODO: add power ups
 # TODO: add acceleration graphics, i.e. fire out of back of ship when accelerating
-# TODO: improve motion control
+# TODO: improve motion control (more realistic acceleration dynamics)
 class PlayerShip():
     def __init__(self, canvas):
         self.canvas = canvas

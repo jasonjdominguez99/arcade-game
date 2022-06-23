@@ -9,7 +9,7 @@
 
 # imports
 from tkinter import BitmapImage, PhotoImage
-from PIL import Image, ImageTk
+import math
 
 
 # class definitions
@@ -29,6 +29,9 @@ class Asteroid():
         # self.img = PhotoImage(file=self.image_path)
         self.img.img = self.img
 
+        self.direction = 100
+        self.speed = 1
+
 
     def set_center_coords(self):
         self.center_coords = [50, 50]
@@ -40,3 +43,20 @@ class Asteroid():
             image=self.img
         )
         self.canvas.pack()
+
+
+    def move(self):
+        rad_angle = math.radians(self.direction)
+
+        x_increase = self.speed*math.sin(rad_angle)
+        y_increase = self.speed*math.cos(rad_angle)
+
+        self.center_coords[0] += x_increase
+        self.center_coords[1] -= y_increase
+
+        self.canvas.coords(
+            self.asteroid,
+            self.center_coords[0], self.center_coords[1]
+        )
+
+        self.canvas.after(10, self.move)

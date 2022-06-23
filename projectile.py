@@ -43,9 +43,7 @@ class Projectile():
         self.canvas.pack()
 
 
-    def move(self):
-        coords = self.coords
-    
+    def move(self):    
         rad_angle = math.radians(self.direction)
 
         x_increase = self.speed*math.sin(rad_angle)

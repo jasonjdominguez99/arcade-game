@@ -26,6 +26,7 @@ class Game(tk.Canvas):
 
         asteroids = Asteroid(self)
         asteroids.draw()
+        asteroids.move()
 
         self.bind("<Right>", ship.rotate)
         self.bind("<Left>", ship.rotate)
