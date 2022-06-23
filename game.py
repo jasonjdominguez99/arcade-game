@@ -9,6 +9,7 @@
 # imports
 import tkinter as tk
 from player_ship import PlayerShip
+from enemy import Asteroid
 
 
 # class definitions
@@ -22,6 +23,9 @@ class Game(tk.Canvas):
         ship = PlayerShip(self)
         ship.draw()
         ship.move()
+
+        asteroids = Asteroid(self)
+        asteroids.draw()
 
         self.bind("<Right>", ship.rotate)
         self.bind("<Left>", ship.rotate)
