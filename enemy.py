@@ -10,6 +10,7 @@
 # imports
 from tkinter import BitmapImage, PhotoImage
 import math
+import random
 
 
 # class definitions
@@ -20,7 +21,9 @@ import math
 class Asteroid():
     def __init__(self, canvas):
         self.canvas = canvas
-        self.image_path = r'images\asteroid-medium-1.xbm'
+        # rand_n = random.randint(1, 1)
+        rand_n = 1
+        self.image_path = fr'images\asteroid-medium-{rand_n}.xbm'
         # self.image_path = r'images\asteroid-medium-1.png'
 
         self.set_center_coords()
@@ -29,12 +32,15 @@ class Asteroid():
         # self.img = PhotoImage(file=self.image_path)
         self.img.img = self.img
 
-        self.direction = 100
-        self.speed = 1
+        self.direction = random.randint(0, 359)
+        self.speed = random.randint(1, 20)/10.
 
 
     def set_center_coords(self):
-        self.center_coords = [50, 50]
+        self.canvas.master.update()
+        rand_x = random.randint(0, self.canvas.winfo_width())
+        rand_y = random.randint(0, self.canvas.winfo_height())
+        self.center_coords = [rand_x, rand_y]
 
 
     def draw(self):
