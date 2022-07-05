@@ -35,6 +35,7 @@ class PlayerShip():
         self.acc_direction = 0
 
         self.score = 0
+        self.increment_score()
 
         self.set_initial_position()
 
@@ -166,3 +167,7 @@ class PlayerShip():
         proj.draw()
         proj.move()
         
+
+    def increment_score(self):
+        self.score += 1
+        self.canvas.after(10, self.increment_score)

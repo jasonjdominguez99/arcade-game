@@ -17,6 +17,7 @@ import random
 # class definitions
 # TODO: create enemy object base class
 # TODO: create asteroid class using inheritance
+# TODO: implement rotation of asteroid
 # TODO: implement collision dynamics and splitting large asteroids into samller ones
 # TODO: create alien ship class using inheritance
 class Asteroid():
@@ -64,6 +65,7 @@ class Asteroid():
 
     
     def rotate(self):
+        # asteroid not currently rotating
         self.orientation += self.rotation_direction*self.rotation_speed
         self.generate_image()
         self.asteroid = self.canvas.create_image(
