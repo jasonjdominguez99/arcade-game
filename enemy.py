@@ -25,8 +25,7 @@ class Asteroid():
         self.canvas = canvas
 
         self.rotation_direction = [-1, 1][random.randint(0, 1)]
-        # self.rotation_speed = random.randint(1, 10)
-        self.rotation_speed = 50
+        self.rotation_speed = random.randint(1, 5)
         self.orientation = random.randint(0, 359)
         self.direction = random.randint(0, 359)
         self.speed = random.randint(1, 20)/10.
@@ -72,7 +71,8 @@ class Asteroid():
             self.center_coords[0], self.center_coords[1],
             image=self.tk_img
         )
-        self.canvas.after(10, self.rotate)
+        self.canvas.pack()
+        self.canvas.after(20, self.rotate)
 
 
     def move(self):
