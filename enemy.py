@@ -12,8 +12,7 @@ import math
 
 
 # class definition
-# TODO: implement collision dynamics and splitting large asteroids into samller ones
-# TODO: create alien ship class using inheritance
+# TODO: implement collision dynamics and
 class Enemy():
     def __init__(self, canvas):
         self.canvas = canvas
@@ -26,11 +25,6 @@ class Enemy():
         self.tk_img = None
         self.img = None
         self.object = None
-
-        self.set_center_coords()
-
-    def set_center_coords(self):
-        raise NotImplementedError
 
     def generate_image(self):
         self.tk_img = ImageTk.PhotoImage(self.img.rotate(self.orientation))
