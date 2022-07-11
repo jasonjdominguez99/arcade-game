@@ -22,9 +22,7 @@ class AlienShip(Enemy):
         self.direction = [90, 270][random.randint(0, 1)]
         self.orientation = 0
 
-        image_path = r'images\alien-ship.png'
-        self.img = Image.open(image_path)
-        self.img_w, self.img_h = self.img.size
+        self.image_path = r'images\alien-ship.png'
         self.generate_image()
 
         self.set_center_coords()

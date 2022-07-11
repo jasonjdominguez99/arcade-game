@@ -7,7 +7,7 @@
 
 
 # imports
-from PIL import ImageTk
+from PIL import Image, ImageTk
 import math
 
 
@@ -22,11 +22,15 @@ class Enemy():
         self.direction = None
         self.orientation = None
         
-        self.tk_img = None
+        self.image_path = None
         self.img = None
+        self.img_w, self.img_h = None, None
+        self.tk_img = None
         self.object = None
 
     def generate_image(self):
+        self.img = Image.open(self.image_path)
+        self.img_w, self.img_h = self.img.size
         self.tk_img = ImageTk.PhotoImage(self.img.rotate(self.orientation))
 
     def draw(self):

@@ -28,10 +28,8 @@ class Asteroid(Enemy):
         self.direction = random.randint(0, 359)
         self.speed = random.randint(1, 20)/10.
 
-        # rand_n = random.randint(1, 1)
-        rand_n = 1
-        image_path = fr'images\asteroid-medium-{rand_n}.png'
-        self.img = Image.open(image_path)
+        rand_n = random.randint(1, 1)
+        self.image_path = fr'images\asteroid-medium-{rand_n}.png'
         self.generate_image()
 
     def set_center_coords(self):
