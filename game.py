@@ -11,9 +11,11 @@ import tkinter as tk
 from player_ship import PlayerShip
 from asteroid import Asteroid
 from alien_ship import AlienShip
+from enemies import Enemies
 
 
 # class definitions
+# TODO: replace individual enemy initialization with enemies initialization
 class Game(tk.Canvas):
     def __init__(self, master, w, h):
         tk.Canvas.__init__(self, master, width=w, height=h, bg="black")
@@ -24,6 +26,8 @@ class Game(tk.Canvas):
         ship = PlayerShip(self)
         ship.draw()
         ship.move()
+
+        # enemies = Enemies(ship)
 
         asteroid = Asteroid(self)
         asteroid.draw()

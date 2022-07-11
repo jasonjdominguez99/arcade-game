@@ -13,6 +13,7 @@ import random
 
 
 # class defintion
+# TODO: destroy alien ship when goes off screen
 class AlienShip(Enemy):
     def __init__(self, canvas):
         super().__init__(canvas)

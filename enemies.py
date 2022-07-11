@@ -11,8 +11,8 @@
 
 
 # class definition
-# TODO: Add function which generates enemies
-# TODO: Make generation generate alien ships once player score reach certain thresholds
+# TODO: add function which generates enemies
+# TODO: make generation generate alien ships only once player score reach certain thresholds
 class Enemies():
     def __init__(self, player):
         self.canvas = player.canvas

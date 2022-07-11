@@ -13,6 +13,8 @@ import random
 
 
 # class definition
+# TODO: make asteroid start off screen and move onto the screen
+# TODO: destroy asteroid upon moving off screen
 # TODO: implement splitting large asteroids into samller ones upon collision
 class Asteroid(Enemy):
     def __init__(self, canvas):

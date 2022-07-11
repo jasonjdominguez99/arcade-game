@@ -12,7 +12,7 @@ import math
 
 
 # class definition
-# TODO: implement collision dynamics and
+# TODO: implement collision dynamics
 class Enemy():
     def __init__(self, canvas):
         self.canvas = canvas
