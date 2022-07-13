@@ -14,8 +14,6 @@ import random
 
 # class definition
 # TODO: make asteroid start off screen and move onto the screen
-# TODO: destroy asteroid upon moving off screen
-# TODO: implement splitting large asteroids into samller ones upon collision
 class Asteroid(Enemy):
     def __init__(self, canvas):
         super().__init__(canvas)
@@ -29,13 +27,19 @@ class Asteroid(Enemy):
         self.speed = random.randint(1, 20)/10.
 
         rand_n = random.randint(1, 1)
-        self.image_path = fr'images\asteroid-medium-{rand_n}.png'
+        self.size = "medium"
+        self.image_path = fr'images\asteroid-{self.size}-{rand_n}.png'
         self.generate_image()
 
     def set_center_coords(self):
         self.canvas.master.update()
-        x = random.randint(0, self.canvas.winfo_width())
-        y = random.randint(0, self.canvas.winfo_height())
+
+        rand_x = random.randint(1, self.canvas.winfo_width())
+        x = [0, rand_x][random.randint(0, 1)]
+        y = (
+            random.randint(0, self.canvas.winfo_height())
+            if x == 0 else 0
+        )
         self.center_coords = [x, y]
 
     def rotate(self):
