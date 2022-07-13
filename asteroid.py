@@ -23,8 +23,12 @@ class Asteroid(Enemy):
         self.rotation_direction = [-1, 1][random.randint(0, 1)]
         self.rotation_speed = random.randint(1, 5)
         self.orientation = random.randint(0, 359)
-        self.direction = random.randint(0, 359)
         self.speed = random.randint(1, 20)/10.
+
+        if self.center_coords[0] < 0:
+            self.direction = random.randint(181, 359)
+        else:
+            self.direction = random.randint(0, 180)
 
         rand_n = random.randint(1, 1)
         self.size = "medium"
