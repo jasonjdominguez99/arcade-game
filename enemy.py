@@ -53,5 +53,7 @@ class Enemy():
             self.object,
             self.center_coords[0], self.center_coords[1]
         )
+        
+        print(self.center_coords)
 
         self.canvas.after(10, self.move)

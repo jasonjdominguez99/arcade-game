@@ -21,6 +21,7 @@ class Game(tk.Canvas):
         tk.Canvas.__init__(self, master, width=w, height=h, bg="black")
         self.master = master
         
+    def activate(self):
         self.pack()
 
         ship = PlayerShip(self)

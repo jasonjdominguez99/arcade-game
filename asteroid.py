@@ -18,31 +18,51 @@ class Asteroid(Enemy):
     def __init__(self, canvas):
         super().__init__(canvas)
 
-        self.set_center_coords()
-
         self.rotation_direction = [-1, 1][random.randint(0, 1)]
         self.rotation_speed = random.randint(1, 5)
         self.orientation = random.randint(0, 359)
         self.speed = random.randint(1, 20)/10.
-
-        if self.center_coords[0] < 0:
-            self.direction = random.randint(181, 359)
-        else:
-            self.direction = random.randint(0, 180)
 
         rand_n = random.randint(1, 1)
         self.size = "medium"
         self.image_path = fr'images\asteroid-{self.size}-{rand_n}.png'
         self.generate_image()
 
+        self.set_center_coords()
+
+        # if self.center_coords[0] < 0:
+        #     self.direction = random.randint(0, 180)
+        # else:
+        #     self.direction = random.randint(181, 359)
+        coord_total = self.center_coords[0] + self.center_coords[1]
+        self.canvas.master.update()
+        if coord_total < self.canvas.winfo_width()/2:
+            # asteroid starting in first quadrant of screen
+            self.direction = random.randint(91, 179)
+        elif coord_total < self.canvas.winfo_width() and self.center_coords[0] > self.canvas.winfo_width()/2:
+            # second quadrant
+            self.direction = random.randint(181, 269)
+        elif coord_total < self.canvas.winfo_width() and self.center_coords[0] < self.canvas.winfo_width()/2:
+            # fourth quadrant
+            self.direction = random.randint(1, 89)
+        else:
+            # third quadrant
+            self.direction = random.randint(271, 359)
+            
+            
+                        
+        print(self.center_coords)
+        print(self.direction)
+
     def set_center_coords(self):
         self.canvas.master.update()
 
-        rand_x = random.randint(1, self.canvas.winfo_width())
-        x = [0, rand_x][random.randint(0, 1)]
+        rand_x = random.randint(0, self.canvas.winfo_width())
+        x = [0 - self.img_w, rand_x, self.canvas.winfo_width() + self.img_w][random.randint(0, 2)]
         y = (
-            random.randint(0, self.canvas.winfo_height())
-            if x == 0 else 0
+            [0 - self.img_h, self.canvas.winfo_height() + self.img_h][random.randint(0, 1)]
+            if x > 0 and x < self.canvas.winfo_width() else
+            random.randint(0, self.canvas.winfo_height())            
         )
         self.center_coords = [x, y]
 

@@ -46,10 +46,12 @@ class AsteroidsGame(tk.Tk):
             "{}x{}+{}+{}".format(self.width, self.height, x, y))
 
     
-    def load_page(self, page_name):
+    def load_page(self, page_name):        
         for page in self.pages.values():
             page.pack_forget()
         page = self.pages[page_name]
+        if page_name == "Game":
+            page.activate()
         page.pack()
         # print("Loaded: " + page_name)
 
