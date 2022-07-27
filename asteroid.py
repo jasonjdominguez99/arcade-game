@@ -13,7 +13,7 @@ import random
 
 
 # class definition
-# TODO: make asteroid start off screen and move onto the screen
+# TODO: improve random direction generation by normalizing coord to have screen center as (0, 0)
 class Asteroid(Enemy):
     def __init__(self, canvas):
         super().__init__(canvas)
@@ -30,10 +30,8 @@ class Asteroid(Enemy):
 
         self.set_center_coords()
 
-        # if self.center_coords[0] < 0:
-        #     self.direction = random.randint(0, 180)
-        # else:
-        #     self.direction = random.randint(181, 359)
+        # method for choosing asteroid direction to move onto screen assumes similar 
+        # screen width and height
         coord_total = self.center_coords[0] + self.center_coords[1]
         self.canvas.master.update()
         if coord_total < self.canvas.winfo_width()/2:
@@ -48,11 +46,6 @@ class Asteroid(Enemy):
         else:
             # third quadrant
             self.direction = random.randint(271, 359)
-            
-            
-                        
-        print(self.center_coords)
-        print(self.direction)
 
     def set_center_coords(self):
         self.canvas.master.update()
